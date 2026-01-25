@@ -31,15 +31,15 @@ const HeroBanner = () => {
                 {/* Intro Section */}
                 <div className="flex-1 text-center md:text-left">
                     <div className="bg-purple-50/80 backdrop-blur-sm border-2 border-black p-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                        <h2 className="text-4xl md:text-5xl font-bold mb-3 ml-20 flex items-center justify-center md:justify-start gap-2 flex-wrap">
+                        <h2 className="text-4xl md:text-5xl font-bold mb-3 ml-30 flex items-center justify-center md:justify-start gap-2 flex-wrap">
                             HELLO, I&apos;M FARHAN!
                             <span className="inline-block animate-bounce">👋</span>
                             
                           
                         </h2>
-                        <span className="text-2xl font-normal text-gray-500 ml-2">どうも私はファーハンです</span>
+                        <span className="text-2xl font-normal text-gray-500 ml-55">どうも私はファーハンです</span>
                         <div className="space-y-3">
-                            <p className="text-lg font-bold text-purple-600">✨ Japanese Lit Grad turned Fullstack Developer ✨</p>
+                            <p className="text-lg font-bold text-purple-600 ml-25">✨ Japanese Lit Grad turned Fullstack Developer ✨</p>
                             <p className="text-base leading-relaxed text-black">
                                 I’m a Fullstack Developer and Japanese Literature graduate who builds intuitive digital solutions. I’m driven by the challenge of solving mundane or complex everyday problems by creating tools that make life seamless.💻
                             </p>

@@ -81,15 +81,14 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const certifications: Certification[] = [
- {
+  {
     id: '1',
-    slug: 'toefl-itp', // Page looks for /public/images/toefl-itp.png
+    slug: 'toefl-itp',
     name: 'TOEFL ITP (Score: 630/677)',
-    issuer: 'ETS',
+    issuer: 'Educational Testing Service (ETS)',
     date: 'Jan 2024',
     credentialUrl: 'https://aws.amazon.com/verification',
     localImage: '/images/toefl-itp.png',
-    hasLocalCopy: true // You can use this flag instead of localImage
   },
   {
     id: '2',

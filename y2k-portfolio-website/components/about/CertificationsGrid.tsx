@@ -34,7 +34,7 @@ const CertificationsGrid = () => {
                     : 'bg-yellow-300 hover:bg-yellow-400'
                 }`}
               >
-                {hasLocalImage ? "View Credential 📄" : "Verify Online →"}
+                {hasLocalImage ? "View Certificate 📄" : "View Online Certificate →"}
               </Link>
             </div>
           );
