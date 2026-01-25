@@ -6,7 +6,7 @@ const FeaturedProjects = () => {
   const featuredProjects = projects.filter(p => p.featured);
 
   return (
-    <div className="bg-gradient-to-r from-yellow-200 to-pink-200 border-4 border-black p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative">
+    <div className="bg-yellow-200 border-4 border-black p-8 shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] relative">
       <div className="absolute top-4 right-4 text-4xl">😊</div>
       <h2 className="text-4xl font-bold mb-4">FEATURED WORK!</h2>
       <p className="text-xl mb-6">Check out some of my favorite projects ✨</p>

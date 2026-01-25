@@ -13,7 +13,7 @@ export interface Project {
 
 export interface Skill {
   name: string;
-  category: 'frontend' | 'backend' | 'design' | 'tools';
+  category: 'frontend' | 'backend' | 'design' | 'tools' | 'languages';
   level?: number;
 }
 
@@ -31,4 +31,16 @@ export interface SocialLink {
   name: string;
   url: string;
   icon: string;
+}
+
+export interface Certification {
+  id: string;
+  slug: string;
+  name: string;
+  issuer: string;
+  date: string;
+  credentialUrl?: string;
+  credentialId?: string;
+  hasLocalCopy?: boolean;
+  localImage?: string;
 }

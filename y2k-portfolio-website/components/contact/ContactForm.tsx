@@ -31,7 +31,7 @@ const ContactForm = () => {
         </div>
       )}
 
-      <div className="bg-white border-2 border-black p-6 space-y-4">
+      <div className="bg-yellow-100 border-2 border-black p-6 space-y-4">
         <div>
           <label className="font-bold block mb-2">YOUR NAME</label>
           <input

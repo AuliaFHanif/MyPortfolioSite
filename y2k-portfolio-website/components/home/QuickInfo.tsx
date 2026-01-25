@@ -13,7 +13,7 @@ const QuickInfo = () => {
 
       <div className="bg-pink-200 border-4 border-black p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
         <h3 className="text-xl font-bold mb-4">HAPPINESS LOADING...</h3>
-        <div className="w-full bg-white border-2 border-black h-6 mb-4">
+        <div className="w-full bg-gray-100 border-2 border-black h-6 mb-4">
           <div className="bg-yellow-300 h-full w-3/4 border-r-2 border-black"></div>
         </div>
         <button className="bg-green-300 border-2 border-black px-6 py-2 font-bold w-full hover:bg-green-400 transition-colors">

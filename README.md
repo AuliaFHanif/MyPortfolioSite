@@ -201,5 +201,5 @@ Project Link: [https://github.com/AuliaFHanif/MyPortfolioSite](https://github.co
 ---
 
 Made by Aulia Farhan Hanif
+THIS IS A VIBECODED PROJECT
 
-**⭐ Star this repo if you like it! ⭐**

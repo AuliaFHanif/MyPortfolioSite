@@ -5,8 +5,8 @@ import Footer from '@/components/layout/Footer';
 import DecorativeElements from '@/components/layout/DecorativeElements';
 
 export const metadata: Metadata = {
-  title: 'Your Name - Portfolio',
-  description: 'Creative developer and designer portfolio with Y2K aesthetic',
+  title: 'Aulia Farhan Hanif | Fullstack Developer',
+  description: "Fullstack Developer with a hobby of creating apps to make people's lives easier. ",
 };
 
 export default function RootLayout({
@@ -20,7 +20,7 @@ export default function RootLayout({
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
       </head>
       <body className="font-mono">
-        <div className="min-h-screen bg-linear-to-br from-purple-200 via-pink-200 to-blue-200 relative overflow-hidden">
+        <div className="min-h-screen bg-purple-100 relative overflow-hidden">
           <DecorativeElements />
           <Navbar />
           <main className="relative z-10">
