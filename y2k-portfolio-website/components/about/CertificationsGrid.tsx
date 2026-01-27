@@ -8,11 +8,6 @@ const CertificationsGrid = () => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {certifications.map((cert) => {
-          const hasLocalImage = Boolean(cert.localImage);
-          const targetHref = hasLocalImage
-            ? `/certifications/${cert.slug}`
-            : cert.credentialUrl ?? '#';
-
           return (
             <div 
               key={cert.id}
@@ -25,16 +20,12 @@ const CertificationsGrid = () => {
               <p className="text-xs font-bold text-black/40 mb-4 tracking-widest">📅 {cert.date}</p>
               
               <Link 
-                href={targetHref}
-                target={hasLocalImage ? undefined : "_blank"}
-                rel={hasLocalImage ? undefined : "noopener noreferrer"}
-                className={`inline-block border-2 border-black px-4 py-2 font-black text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all ${
-                  hasLocalImage 
-                    ? 'bg-purple-300 hover:bg-purple-400' 
-                    : 'bg-yellow-300 hover:bg-yellow-400'
-                }`}
+                href={cert.credentialUrl ?? '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block border-2 border-black px-4 py-2 font-black text-sm shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all bg-yellow-300 hover:bg-yellow-400"
               >
-                {hasLocalImage ? "View Certificate 📄" : "View Online Certificate →"}
+                View Certificate →
               </Link>
             </div>
           );

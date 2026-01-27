@@ -5,7 +5,7 @@ export interface Project {
   description: string;
   longDescription: string;
   tags: string[];
-  image: string;
+  images: string[];
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
@@ -37,10 +37,9 @@ export interface Certification {
   id: string;
   slug: string;
   name: string;
+  result?: string;
   issuer: string;
   date: string;
   credentialUrl?: string;
-  credentialId?: string;
-  hasLocalCopy?: boolean;
-  localImage?: string;
+  imageUrl?: string;
 }
