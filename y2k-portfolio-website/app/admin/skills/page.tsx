@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import ProtectedRoute from '@/components/admin/ProtectedRoute';
+import Swal from 'sweetalert2';
 
 interface Skill {
   _id: string;
@@ -33,13 +34,36 @@ export default function AdminSkills() {
   };
 
   const handleDelete = async (_id: string) => {
-    if (!confirm('Are you sure you want to delete this skill?')) return;
+    const result = await Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#22c55e',
+      cancelButtonColor: '#ef4444',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel'
+    });
+
+    if (!result.isConfirmed) return;
 
     try {
       await fetch(`/api/skills/${_id}`, { method: 'DELETE' });
+      await Swal.fire({
+        title: 'Deleted!',
+        text: 'Skill has been deleted.',
+        icon: 'success',
+        confirmButtonColor: '#22c55e'
+      });
       fetchSkills();
     } catch (error) {
       console.error('Error deleting skill:', error);
+      await Swal.fire({
+        title: 'Error!',
+        text: 'Failed to delete skill.',
+        icon: 'error',
+        confirmButtonColor: '#ef4444'
+      });
     }
   };
 

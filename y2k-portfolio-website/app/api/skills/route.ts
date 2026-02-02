@@ -12,7 +12,7 @@ interface SkillDocument {
 export async function GET() {
   try {
     await connectDB();
-    const skills = await Skill.find({}).sort({ order: 1 }).lean();
+    const skills = await Skill.find({}).lean();
     
     const formattedSkills = (skills as SkillDocument[]).map((skill: SkillDocument) => ({
       ...skill,
@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
       name: data.name,
       category: data.category,
       level: data.level,
-      order: data.order || 0,
+
     });
 
     return NextResponse.json({

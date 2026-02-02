@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
-import Certification from '@/app/models/Certification';
+import OngoingWork from '@/app/models/OngoingWork';
 import { getSession } from '@/lib/auth';
 
-// GET single certification
+// GET single ongoing work item
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -11,29 +11,29 @@ export async function GET(
   try {
     const { id } = await params;
     await connectDB();
-    const certification = await Certification.findById(id).lean();
+    const item = await OngoingWork.findById(id).lean();
 
-    if (!certification) {
+    if (!item) {
       return NextResponse.json(
-        { error: 'Certification not found' },
+        { error: 'Ongoing work not found' },
         { status: 404 }
       );
     }
 
     return NextResponse.json({
-      ...certification,
-      id: certification._id.toString(),
+      ...item,
+      id: item._id.toString(),
     });
   } catch (error) {
-    console.error('Error fetching certification:', error);
+    console.error('Error fetching ongoing work:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch certification' },
+      { error: 'Failed to fetch ongoing work' },
       { status: 500 }
     );
   }
 }
 
-// PUT update certification
+// PUT update ongoing work item
 export async function PUT(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -48,41 +48,38 @@ export async function PUT(
     await connectDB();
     const data = await request.json();
 
-    const certification = await Certification.findByIdAndUpdate(
+    const item = await OngoingWork.findByIdAndUpdate(
       id,
       {
-        slug: data.slug,
-        name: data.name,
-        issuer: data.issuer,
-        date: data.date,
-        credentialId: data.credentialId,
-        credentialUrl: data.credentialUrl,
-        icon: data.icon,
+        title: data.title,
+        description: data.description,
+        status: data.status,
+        progress: data.progress,
       },
       { new: true }
     );
 
-    if (!certification) {
+    if (!item) {
       return NextResponse.json(
-        { error: 'Certification not found' },
+        { error: 'Ongoing work not found' },
         { status: 404 }
       );
     }
 
     return NextResponse.json({
-      ...certification.toObject(),
-      id: certification._id.toString(),
+      ...item.toObject(),
+      id: item._id.toString(),
     });
   } catch (error) {
-    console.error('Error updating certification:', error);
+    console.error('Error updating ongoing work:', error);
     return NextResponse.json(
-      { error: 'Failed to update certification' },
+      { error: 'Failed to update ongoing work' },
       { status: 500 }
     );
   }
 }
 
-// DELETE certification
+// DELETE ongoing work item
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -95,20 +92,20 @@ export async function DELETE(
 
     const { id } = await params;
     await connectDB();
-    const certification = await Certification.findByIdAndDelete(id);
+    const item = await OngoingWork.findByIdAndDelete(id);
 
-    if (!certification) {
+    if (!item) {
       return NextResponse.json(
-        { error: 'Certification not found' },
+        { error: 'Ongoing work not found' },
         { status: 404 }
       );
     }
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    console.error('Error deleting certification:', error);
+    console.error('Error deleting ongoing work:', error);
     return NextResponse.json(
-      { error: 'Failed to delete certification' },
+      { error: 'Failed to delete ongoing work' },
       { status: 500 }
     );
   }

@@ -12,7 +12,6 @@ interface CertificationData {
   date: string;
   credentialUrl?: string;
   credentialId?: string;
-  order: number;
 }
 
 type Props = {
@@ -41,7 +40,6 @@ export default async function EditCertificationPage({ params }: Props) {
         date: cert.date,
         credentialUrl: cert.credentialUrl,
         credentialId: cert.credentialId,
-        order: cert.order,
       };
     }
   } catch (error) {

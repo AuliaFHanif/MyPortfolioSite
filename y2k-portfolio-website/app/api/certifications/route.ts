@@ -12,7 +12,7 @@ interface CertificationDocument {
 export async function GET() {
   try {
     await connectDB();
-    const certifications = await Certification.find({}).sort({ order: 1 }).lean();
+    const certifications = await Certification.find({}).lean();
     
     const formattedCertifications = (certifications as CertificationDocument[]).map((cert: CertificationDocument) => ({
       ...cert,

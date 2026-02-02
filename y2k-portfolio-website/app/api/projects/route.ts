@@ -12,7 +12,7 @@ interface ProjectDocument {
 export async function GET() {
   try {
     await connectDB();
-    const projects = await Project.find({}).sort({ order: 1 }).lean();
+    const projects = await Project.find({}).lean();
     
     const formattedProjects = (projects as ProjectDocument[]).map((project: ProjectDocument) => ({
       ...project,
@@ -50,7 +50,6 @@ export async function POST(request: NextRequest) {
       liveUrl: data.liveUrl,
       githubUrl: data.githubUrl,
       featured: data.featured || false,
-      order: data.order || 0,
     });
 
     return NextResponse.json({

@@ -6,11 +6,12 @@ import { getSession } from '@/lib/auth';
 // GET single project
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     await connectDB();
-    const project = await Project.findById(params.id).lean();
+    const project = await Project.findById(id).lean();
 
     if (!project) {
       return NextResponse.json(
@@ -35,7 +36,7 @@ export async function GET(
 // PUT update project
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getSession();
@@ -43,11 +44,12 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
     await connectDB();
     const data = await request.json();
 
     const project = await Project.findByIdAndUpdate(
-      params.id,
+      id,
       {
         slug: data.slug,
         title: data.title,
@@ -58,7 +60,6 @@ export async function PUT(
         liveUrl: data.liveUrl,
         githubUrl: data.githubUrl,
         featured: data.featured,
-        order: data.order,
       },
       { new: true }
     );
@@ -86,7 +87,7 @@ export async function PUT(
 // DELETE project
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getSession();
@@ -94,8 +95,9 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
     await connectDB();
-    const project = await Project.findByIdAndDelete(params.id);
+    const project = await Project.findByIdAndDelete(id);
 
     if (!project) {
       return NextResponse.json(

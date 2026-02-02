@@ -11,7 +11,6 @@ interface Certification {
   date: string;
   credentialUrl?: string;
   credentialId?: string;
-  order: number;
 }
 
 interface CertificationFormProps {
@@ -31,7 +30,6 @@ export default function CertificationForm({ certification, isEdit = false }: Cer
       date: '',
       credentialUrl: '',
       credentialId: '',
-      order: 0,
     }
   );
 
@@ -39,7 +37,7 @@ export default function CertificationForm({ certification, isEdit = false }: Cer
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: name === 'order' ? parseInt(value) : value,
+      [name]: value,
     });
   };
 
@@ -152,17 +150,6 @@ export default function CertificationForm({ certification, isEdit = false }: Cer
           onChange={handleChange}
           className="w-full border-2 border-black p-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
           placeholder="e.g., AWS-123456789"
-        />
-      </div>
-
-      <div>
-        <label className="block font-bold mb-2">ORDER</label>
-        <input
-          type="number"
-          name="order"
-          value={formData.order}
-          onChange={handleChange}
-          className="w-full border-2 border-black p-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
         />
       </div>
 

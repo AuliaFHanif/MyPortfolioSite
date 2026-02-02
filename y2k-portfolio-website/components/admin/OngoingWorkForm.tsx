@@ -3,31 +3,35 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-interface Skill {
+interface OngoingWorkItem {
   _id?: string;
-  name: string;
-  category: 'frontend' | 'backend' | 'languages' | 'tools';
-  level: number;
+  title: string;
+  description: string;
+  status: 'Planning' | 'Designing' | 'Coding' | 'Testing' | 'Polishing';
+  progress: number;
 }
 
-interface SkillsFormProps {
-  skill?: Skill;
+interface OngoingWorkFormProps {
+  item?: OngoingWorkItem;
   isEdit?: boolean;
 }
 
-export default function SkillsForm({ skill, isEdit = false }: SkillsFormProps) {
+export default function OngoingWorkForm({ item, isEdit = false }: OngoingWorkFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [formData, setFormData] = useState<Skill>(
-    skill || {
-      name: '',
-      category: 'frontend',
-      level: 50,
+  const [formData, setFormData] = useState<OngoingWorkItem>(
+    item || {
+      title: '',
+      description: '',
+      status: 'Coding',
+      progress: 0,
     }
   );
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value, type } = e.target;
     setFormData({
       ...formData,
@@ -41,7 +45,7 @@ export default function SkillsForm({ skill, isEdit = false }: SkillsFormProps) {
     setLoading(true);
 
     try {
-      const url = isEdit && skill?._id ? `/api/skills/${skill._id}` : '/api/skills';
+      const url = isEdit && item?._id ? `/api/ongoing-work/${item._id}` : '/api/ongoing-work';
       const method = isEdit ? 'PUT' : 'POST';
 
       const response = await fetch(url, {
@@ -52,10 +56,10 @@ export default function SkillsForm({ skill, isEdit = false }: SkillsFormProps) {
 
       if (!response.ok) {
         const data = await response.json();
-        throw new Error(data.error || 'Failed to save skill');
+        throw new Error(data.error || 'Failed to save ongoing work');
       }
 
-      router.push('/admin/skills');
+      router.push('/admin/ongoing-work');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -72,42 +76,55 @@ export default function SkillsForm({ skill, isEdit = false }: SkillsFormProps) {
       )}
 
       <div>
-        <label className="block font-bold mb-2">SKILL NAME *</label>
+        <label className="block font-bold mb-2">TITLE *</label>
         <input
           type="text"
-          name="name"
-          value={formData.name}
+          name="title"
+          value={formData.title}
           onChange={handleChange}
           required
           className="w-full border-2 border-black p-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
-          placeholder="e.g., React, Python, etc."
+          placeholder="Ongoing task title"
         />
       </div>
 
       <div>
-        <label className="block font-bold mb-2">CATEGORY *</label>
+        <label className="block font-bold mb-2">DESCRIPTION *</label>
+        <textarea
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          required
+          className="w-full border-2 border-black p-2 focus:outline-none focus:ring-2 focus:ring-purple-600 h-24"
+          placeholder="Short description of the work"
+        />
+      </div>
+
+      <div>
+        <label className="block font-bold mb-2">STATUS *</label>
         <select
-          name="category"
-          value={formData.category}
+          name="status"
+          value={formData.status}
           onChange={handleChange}
           className="w-full border-2 border-black p-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
         >
-          <option value="frontend">Frontend</option>
-          <option value="backend">Backend</option>
-          <option value="languages">Languages</option>
-          <option value="tools">Tools</option>
+          <option value="Planning">Planning</option>
+          <option value="Designing">Designing</option>
+          <option value="Coding">Coding</option>
+          <option value="Testing">Testing</option>
+          <option value="Polishing">Polishing</option>
         </select>
       </div>
 
       <div>
-        <label className="block font-bold mb-2">LEVEL: {formData.level}%</label>
+        <label className="block font-bold mb-2">PROGRESS: {formData.progress}%</label>
         <input
           type="range"
-          name="level"
+          name="progress"
           min="0"
           max="100"
           step="5"
-          value={formData.level}
+          value={formData.progress}
           onChange={handleChange}
           className="w-full h-2 bg-gray-300 border-2 border-black rounded"
         />
@@ -118,7 +135,7 @@ export default function SkillsForm({ skill, isEdit = false }: SkillsFormProps) {
         disabled={loading}
         className="w-full bg-green-300 border-2 border-black p-3 font-bold hover:bg-green-400 disabled:opacity-50 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]"
       >
-        {loading ? 'SAVING...' : isEdit ? 'UPDATE SKILL ✏️' : 'ADD SKILL ✨'}
+        {loading ? 'SAVING...' : isEdit ? 'UPDATE ONGOING WORK ✏️' : 'CREATE ONGOING WORK ✨'}
       </button>
     </form>
   );

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LogOut, Home, LayoutDashboard, Briefcase, Settings, Award, Link2 } from 'lucide-react';
+import { LogOut, Home, LayoutDashboard, Briefcase, Settings, Award, Link2, Activity } from 'lucide-react';
 
 export default function AdminNav() {
   const pathname = usePathname();
@@ -20,6 +20,7 @@ export default function AdminNav() {
     { href: '/admin/skills', label: 'Skills', icon: Settings },
     { href: '/admin/certifications', label: 'Certifications', icon: Award },
     { href: '/admin/social-links', label: 'Social Links', icon: Link2 },
+    { href: '/admin/ongoing-work', label: 'Ongoing Work', icon: Activity },
   ];
 
   return (

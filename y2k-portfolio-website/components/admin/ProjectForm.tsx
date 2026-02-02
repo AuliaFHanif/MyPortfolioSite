@@ -15,7 +15,6 @@ interface Project {
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
-  order: number;
 }
 
 interface ProjectFormProps {
@@ -40,7 +39,6 @@ export default function ProjectForm({ project, isEdit = false }: ProjectFormProp
       liveUrl: '',
       githubUrl: '',
       featured: false,
-      order: 0,
     }
   );
 
@@ -259,30 +257,17 @@ export default function ProjectForm({ project, isEdit = false }: ProjectFormProp
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block font-bold mb-2">ORDER</label>
+      <div>
+        <label className="flex items-center gap-2 font-bold cursor-pointer">
           <input
-            type="number"
-            name="order"
-            value={formData.order}
+            type="checkbox"
+            name="featured"
+            checked={formData.featured}
             onChange={handleChange}
-            className="w-full border-2 border-black p-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
+            className="w-5 h-5"
           />
-        </div>
-
-        <div className="flex items-end">
-          <label className="flex items-center gap-2 font-bold cursor-pointer">
-            <input
-              type="checkbox"
-              name="featured"
-              checked={formData.featured}
-              onChange={handleChange}
-              className="w-5 h-5"
-            />
-            FEATURED
-          </label>
-        </div>
+          FEATURED
+        </label>
       </div>
 
       <button

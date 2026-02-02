@@ -6,11 +6,12 @@ import { getSession } from '@/lib/auth';
 // GET single social link
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     await connectDB();
-    const socialLink = await SocialLink.findById(params.id).lean();
+    const socialLink = await SocialLink.findById(id).lean();
 
     if (!socialLink) {
       return NextResponse.json(
@@ -35,7 +36,7 @@ export async function GET(
 // PUT update social link
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getSession();
@@ -43,16 +44,16 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
     await connectDB();
     const data = await request.json();
 
     const socialLink = await SocialLink.findByIdAndUpdate(
-      params.id,
+      id,
       {
         name: data.name,
         url: data.url,
         icon: data.icon,
-        order: data.order,
       },
       { new: true }
     );
@@ -80,7 +81,7 @@ export async function PUT(
 // DELETE social link
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getSession();
@@ -88,8 +89,9 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
     await connectDB();
-    const socialLink = await SocialLink.findByIdAndDelete(params.id);
+    const socialLink = await SocialLink.findByIdAndDelete(id);
 
     if (!socialLink) {
       return NextResponse.json(

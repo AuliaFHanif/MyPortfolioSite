@@ -8,7 +8,6 @@ interface SocialLink {
   name: string;
   url: string;
   icon: string;
-  order: number;
 }
 
 interface SocialLinkFormProps {
@@ -25,7 +24,6 @@ export default function SocialLinkForm({ link, isEdit = false }: SocialLinkFormP
       name: '',
       url: '',
       icon: 'github',
-      order: 0,
     }
   );
 
@@ -33,7 +31,7 @@ export default function SocialLinkForm({ link, isEdit = false }: SocialLinkFormP
     const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]: name === 'order' ? parseInt(value) : value,
+      [name]: value,
     });
   };
 
@@ -111,17 +109,6 @@ export default function SocialLinkForm({ link, isEdit = false }: SocialLinkFormP
           <option value="linkedin">LinkedIn</option>
           <option value="mail">Email</option>
         </select>
-      </div>
-
-      <div>
-        <label className="block font-bold mb-2">ORDER</label>
-        <input
-          type="number"
-          name="order"
-          value={formData.order}
-          onChange={handleChange}
-          className="w-full border-2 border-black p-2 focus:outline-none focus:ring-2 focus:ring-purple-600"
-        />
       </div>
 
       <button

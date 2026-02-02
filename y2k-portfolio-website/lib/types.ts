@@ -43,3 +43,11 @@ export interface Certification {
   credentialUrl?: string;
   imageUrl?: string;
 }
+
+export interface OngoingWork {
+  id: string;
+  title: string;
+  description: string;
+  status: 'Planning' | 'Designing' | 'Coding' | 'Testing' | 'Polishing';
+  progress: number;
+}

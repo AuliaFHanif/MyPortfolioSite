@@ -9,7 +9,6 @@ interface SocialLinkData {
   name: string;
   url: string;
   icon: string;
-  order: number;
 }
 
 type Props = {
@@ -35,7 +34,6 @@ export default async function EditSocialLinkPage({ params }: Props) {
         name: sl.name,
         url: sl.url,
         icon: sl.icon,
-        order: sl.order,
       };
     }
   } catch (error) {

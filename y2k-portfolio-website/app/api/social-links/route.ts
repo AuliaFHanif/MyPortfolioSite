@@ -12,7 +12,7 @@ interface SocialLinkDocument {
 export async function GET() {
   try {
     await connectDB();
-    const socialLinks = await SocialLink.find({}).sort({ order: 1 }).lean();
+    const socialLinks = await SocialLink.find({}).lean();
     
     const formattedLinks = (socialLinks as SocialLinkDocument[]).map((link: SocialLinkDocument) => ({
       ...link,
@@ -44,7 +44,6 @@ export async function POST(request: NextRequest) {
       name: data.name,
       url: data.url,
       icon: data.icon,
-      order: data.order || 0,
     });
 
     return NextResponse.json({

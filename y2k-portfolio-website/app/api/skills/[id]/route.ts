@@ -6,11 +6,12 @@ import { getSession } from '@/lib/auth';
 // GET single skill
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     await connectDB();
-    const skill = await Skill.findById(params.id).lean();
+    const skill = await Skill.findById(id).lean();
 
     if (!skill) {
       return NextResponse.json(
@@ -35,7 +36,7 @@ export async function GET(
 // PUT update skill
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getSession();
@@ -43,16 +44,16 @@ export async function PUT(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
     await connectDB();
     const data = await request.json();
 
     const skill = await Skill.findByIdAndUpdate(
-      params.id,
+      id,
       {
         name: data.name,
         category: data.category,
         level: data.level,
-        order: data.order,
       },
       { new: true }
     );
@@ -80,7 +81,7 @@ export async function PUT(
 // DELETE skill
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getSession();
@@ -88,8 +89,9 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { id } = await params;
     await connectDB();
-    const skill = await Skill.findByIdAndDelete(params.id);
+    const skill = await Skill.findByIdAndDelete(id);
 
     if (!skill) {
       return NextResponse.json(

@@ -9,7 +9,6 @@ interface SkillData {
   name: string;
   category: 'frontend' | 'backend' | 'languages' | 'tools';
   level: number;
-  order: number;
 }
 
 type Props = {
@@ -35,7 +34,6 @@ export default async function EditSkillPage({ params }: Props) {
         name: sk.name,
         category: sk.category,
         level: sk.level,
-        order: sk.order,
       };
     }
   } catch (error) {

@@ -15,7 +15,6 @@ interface ProjectData {
   liveUrl?: string;
   githubUrl?: string;
   featured: boolean;
-  order: number;
 }
 
 type Props = {
@@ -47,7 +46,6 @@ export default async function EditProjectPage({ params }: Props) {
         liveUrl: proj.liveUrl,
         githubUrl: proj.githubUrl,
         featured: proj.featured,
-        order: proj.order,
       };
     }
   } catch (error) {
