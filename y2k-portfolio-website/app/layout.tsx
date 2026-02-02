@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -15,9 +16,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <Script 
+          src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+          strategy="afterInteractive"
+        />
       </head>
       <body className="font-mono">
         <div className="min-h-screen bg-purple-100 relative overflow-hidden">

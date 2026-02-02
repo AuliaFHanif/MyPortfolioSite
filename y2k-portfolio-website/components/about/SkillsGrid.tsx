@@ -1,12 +1,34 @@
-import { skills } from '@/lib/data';
+'use client';
+
+import { useEffect, useState } from 'react';
 
 const SkillsGrid = () => {
+  const [skills, setSkills] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/skills')
+      .then(res => res.json())
+      .then(data => {
+        setSkills(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Failed to fetch skills:', err);
+        setLoading(false);
+      });
+  }, []);
+
   const categories = {
     frontend: skills.filter(s => s.category === 'frontend'),
     backend: skills.filter(s => s.category === 'backend'),
     languages: skills.filter(s => s.category === 'languages'),
     tools: skills.filter(s => s.category === 'tools'),
   };
+
+  if (loading) {
+    return <div className="text-center py-8">Loading skills...</div>;
+  }
 
   return (
     <div className="bg-blue-100 border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
