@@ -50,21 +50,21 @@ const SkillsGrid = () => {
                   
                   {skill.level && (
                     <div className="flex items-center gap-3 w-full">
-                      {/* Mastery Label next to bar */}
+                      {/* Mastery Label */}
                       <span className="text-xs uppercase whitespace-nowrap">Mastery:</span>
                       
-                      {/* Increased height to h-8 for larger text space */}
-                      <div className="flex-grow bg-white border-2 border-black h-8 relative overflow-hidden">
+                      {/* Progress Bar */}
+                      <div className="flex-1 bg-white border-2 border-black h-8 relative overflow-hidden">
                         <div 
-                          className="bg-purple-500 h-full flex items-center justify-center transition-all duration-1000"
+                          className="bg-purple-500 h-full transition-all duration-1000"
                           style={{ width: `${skill.level}%` }}
-                        >
-                          {/* Larger percentage text */}
-                          <span className="text-sm text-white font-black px-2">
-                            {skill.level}%
-                          </span>
-                        </div>
+                        />
                       </div>
+                      
+                      {/* Percentage outside the bar */}
+                      <span className="text-sm font-black min-w-[3ch]">
+                        {skill.level}%
+                      </span>
                     </div>
                   )}
                 </div>

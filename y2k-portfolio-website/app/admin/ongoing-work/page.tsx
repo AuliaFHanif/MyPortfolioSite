@@ -120,13 +120,15 @@ export default function AdminOngoingWork() {
                   </div>
                   <h3 className="text-2xl font-bold mb-2">{item.title}</h3>
                   <p className="text-gray-700 mb-4">{item.description}</p>
-                  <div className="w-full bg-white border-2 border-black h-6 relative overflow-hidden">
-                    <div
-                      className="bg-black h-full"
-                      style={{ width: `${item.progress}%` }}
-                    />
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 bg-white border-2 border-black h-6 relative overflow-hidden">
+                      <div
+                        className="bg-black h-full transition-all duration-1000"
+                        style={{ width: `${item.progress}%` }}
+                      />
+                    </div>
+                    <p className="text-xs font-bold min-w-[3ch]">{item.progress}%</p>
                   </div>
-                  <p className="text-xs font-bold mt-2">{item.progress}%</p>
                 </div>
 
                 <div className="flex gap-2 ml-4">

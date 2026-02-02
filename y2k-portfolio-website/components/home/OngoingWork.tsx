@@ -43,7 +43,7 @@ const OngoingWork = () => {
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 bg-red-500 border-2 border-black rounded-full animate-pulse"></div>
             <h2 className="text-3xl font-black uppercase italic tracking-tighter">
-              ONGOING PROJECTS
+              ONGOING WORK
             </h2>
           </div>
         </div>
@@ -75,13 +75,14 @@ const OngoingWork = () => {
                 </div>
 
                 {/* Progress Bar Container */}
-                <div className="w-full bg-white border-2 border-black h-8 relative overflow-hidden">
-                  <div
-                    className={`${statusColors[item.status] || 'bg-yellow-300'} h-full border-r-2 border-black transition-all duration-1000 flex items-center justify-end px-2`}
-                    style={{ width: `${item.progress}%` }}
-                  >
-                    <span className="text-xs font-black">{item.progress}%</span>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 bg-white border-2 border-black h-8 relative overflow-hidden">
+                    <div
+                      className={`${statusColors[item.status] || 'bg-yellow-300'} h-full transition-all duration-1000`}
+                      style={{ width: `${item.progress}%` }}
+                    />
                   </div>
+                  <span className="text-xs font-black min-w-[3ch]">{item.progress}%</span>
                 </div>
               </div>
             ))
