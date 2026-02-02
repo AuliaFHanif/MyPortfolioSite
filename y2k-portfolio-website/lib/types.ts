@@ -37,10 +37,9 @@ export interface Certification {
   id: string;
   slug: string;
   name: string;
+  result?: string;
   issuer: string;
   date: string;
   credentialUrl?: string;
-  credentialId?: string;
-  hasLocalCopy?: boolean;
-  localImage?: string;
+  imageUrl?: string;
 }
